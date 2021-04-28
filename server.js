@@ -40,8 +40,13 @@ app.get('/', (req, res) => {
 //this is the second html route: http://127.0.0.1:3000/notes. 
 //it uses the GET verb of the app object (express).
 app.get('/notes', (req, res) => {
-
     res.sendFile(path.join(__dirname, './public/notes.html'));
+});
+
+//API route
+//this reads the db.json file and displays its data in the browser.
+app.get(`/api/notes`, (req, res) => {
+    res.json(db);
 });
 
 //test by sending a string to the client when the user visits the PORT URL.
