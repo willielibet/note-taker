@@ -38,7 +38,7 @@ app.get('/', (req, res) => {
 //this is the second html route: http://127.0.0.1:3000/notes. 
 //it uses the GET verb of the app object (express).
 app.get('/notes', (req, res) => {
-    res.end(`It works!! Path Hit!: ${req.url}`);
+    res.sendFile(path.join(__dirname, './public/notes.html'));
 });
 
 //test by sending a string to the client when the user visits the PORT URL.
