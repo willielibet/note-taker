@@ -20,9 +20,15 @@ app.use(express.static(__dirname + '/public'));
 // app.use(express(__dirname + '/public')); 
 
 
-//this is the first html route. 
+//this is the first html route: http://127.0.0.1:3000 
 //it uses the GET verb of the app object (express).
 app.get('/', (req, res) => {
+    res.end(`It works!! Path Hit!: ${req.url}`);
+});
+
+//this is the second html route: http://127.0.0.1:3000/notes 
+//it uses the GET verb of the app object (express).
+app.get('/notes', (req, res) => {
     res.end(`It works!! Path Hit!: ${req.url}`);
 });
 
