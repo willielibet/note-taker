@@ -8,10 +8,10 @@ const fs = require('fs');
 
 //json file
 let db = require('./db/db.json');
-const { text } = require('express');
 
 //define a port to listen for incoming requests.
-const PORT = 3000;
+//make the port flexible and not hard coded.
+const PORT = process.env.PORT || 3000;
 
 //create an instance of express.
 const app = express();
@@ -54,10 +54,16 @@ app.get(`/api/notes`, (req, res) => {
     res.json(db);
 });
 
+//returns the home page
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, "./public/index.html"));
+});
+
+
 app.post('/api/notes', (req, res) => {
-        //adds the new entry into the db.json file (in mem)
+        //adds the new entry into the db.json file (in memory)
         db.push(req.body);
-    
+
         //adds the new entry into the db.json file (into the physical db.json file)
         fs.writeFile(path.join(__dirname, './db/db.json'), JSON.stringify(db), (err) => {
             if (err) {
@@ -66,9 +72,11 @@ app.post('/api/notes', (req, res) => {
             });
 
             //returns db.json with new content
-            res.json(db);
-        
-     });
+            res.json(db);        
+    });
+
+
+
 
 
 //inform the client on which port this app listens on; throw an
@@ -77,7 +85,7 @@ app.listen(PORT, (err) => {
     if (err) {
         console.log(err);
     }else {
-    console.log(`Server listening on port ${PORT}`);
+    console.log(`The app is listening on port ${PORT}`);
     }
 });
 
