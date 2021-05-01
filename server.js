@@ -10,7 +10,7 @@ const fs = require('fs');
 let db = require('./db/db.json');
 
 //define a port to listen for incoming requests.
-//make the port flexible and not hard coded.
+//make the port dynamic and not hard coded.
 const PORT = process.env.PORT || 3000;
 
 //create an instance of express.
@@ -29,7 +29,7 @@ app.use(express.json());
 //static middleware serving files from the public directory to the client.
 app.use(express.static(__dirname + '/public')); 
 // app.use(express(__dirname + '/public')); 
-//console.log("dirname " + __dirname)
+// console.log("dirname " + __dirname)
 
 
 //this is the first html route (root route): http://127.0.0.1:3000. 
@@ -75,12 +75,8 @@ app.post('/api/notes', (req, res) => {
             res.json(db);        
     });
 
-
-
-
-
 //inform the client on which port this app listens on; throw an
-//error is something goes wrong.
+//error if something goes wrong.
 app.listen(PORT, (err) => {
     if (err) {
         console.log(err);
